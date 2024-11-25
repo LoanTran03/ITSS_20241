@@ -1,0 +1,152 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #f8f8f8;
+  padding: 20px;
+  border-right: 1px solid #e0e0e0;
+}
+
+.sidebar ul {
+  list-style-type: none;
+}
+
+.sidebar ul li {
+  padding: 10px 0;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-content {
+  flex-grow: 1;
+  padding: 20px;
+  position: relative;
+}
+
+.top-icons {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.notification-icon,
+.profile-icon {
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+}
+
+.breadcrumb {
+  font-size: 14px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+.breadcrumb a {
+  color: #888;
+  text-decoration: none;
+  margin-right: 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.profile-container {
+  display: flex;
+}
+
+.profile-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-placeholder {
+  width: 200px;
+  height: 200px;
+  background-color: #f0f0f0;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.camera-icon {
+  font-size: 40px;
+  color: #888;
+}
+
+.profile-info {
+  flex: 2;
+  padding-left: 20px;
+}
+
+.profile-info form {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-info label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.profile-info input[type="text"],
+.profile-info input[type="email"],
+.profile-info input[type="number"] {
+  padding: 8px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.dob-inputs {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #00ff00;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100px;
+  margin-top: 10px;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.fas.fa-star {
+  color: #000;
+}
