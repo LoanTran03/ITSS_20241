@@ -32,7 +32,7 @@ router.get('/home', (req, res, next) => {
 router.post('/login', (req, res, next) => {
     // The data sent from the user are stored in the req.body object.
     // call our login function and it will return the result(the user data).
-    user.login(req.body.username, req.body.password, function(result) {
+    user.login(req.body.email, req.body.password, function(result) {
         if(result) {
             // Store the user data in a session.
             req.session.user = result;
@@ -52,42 +52,43 @@ router.post('/login', (req, res, next) => {
 router.post('/register', (req, res, next) => {
     // prepare an object containing all user inputs.
 
-    const { username, fullname, password, 'confirm-password': confirmPassword } = req.body;
+    const { email, fullname, password, 'confirm-password': confirmPassword } = req.body;
 
     // Kiểm tra username đã tồn tại chưa
-    user.find(username, function(existingUser) {
+    /*user.find(username, function(existingUser) {
         if (existingUser != null) {
             // Nếu tìm thấy username đã tồn tại, trả về thông báo lỗi
-            return res.render('pages/index', { 
+            return res.render('index', { 
                 title: "My application", 
                 errorMessage: "Username is already taken.",
                 showAlert: true // Cờ để hiển thị alert trên frontend
             });
         }
-    });
+    });*/
 
     // XÁC NHẬN MẬT KHẨU
     if (password != null && confirmPassword != null && password !== confirmPassword) {
         return res.render('index', { 
             title: "My application", 
-            errorMessage: "Password and Confirm Password do not match!",
+            errorMessage: "Xác nhận mật khẩu không đúng!",
             showAlert: true,
         });
     }
 
+
     // CHECK EMAIL
-    if (username != null && username.length > 64) {
+    if (email != null && email.length > 64) {
         return res.render('index', { 
             title: "My application", 
-            errorMessage: "Username must be no longer than 64 characters.",
+            errorMessage: "Email không quá 64 kí tự",
             showAlert: true // Cờ để hiển thị alert trên frontend
         });
     }
 
-    if (!username.includes('@') && username != null) {
+    if (!email.includes('@') && email != null) {
         return res.render('index', { 
             title: "My application", 
-            errorMessage: "Username must contain the '@' character.",
+            errorMessage: "email phải chứa kí tự @",
             showAlert: true // Cờ để hiển thị alert trên frontend
         });
     }
@@ -103,7 +104,7 @@ router.post('/register', (req, res, next) => {
     }
 
     let userInput = {
-        username: req.body.username,
+        email: req.body.email,
         fullname: req.body.fullname,
         password: req.body.password
     };

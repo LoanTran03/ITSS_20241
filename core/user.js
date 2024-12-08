@@ -22,7 +22,7 @@ User.prototype = {
         body.password = pwd;
 
         const bind = Object.values(body);  // Lấy các giá trị từ đối tượng `body`
-        const sql = `INSERT INTO users(username, fullname, password) VALUES (?, ?, ?)`;
+        const sql = `INSERT INTO users(email, fullname, password) VALUES (?, ?, ?)`;
 
         pool.query(sql, bind, function(err, result) {
             if (err) throw err;
@@ -31,8 +31,8 @@ User.prototype = {
     },
 
     // Đăng nhập (so sánh mật khẩu người dùng với DB)
-    login: function(username, password, callback) {
-        this.find(username, function(user) {
+    login: function(email, password, callback) {
+        this.find(email, function(user) {
             if (user && user.password === password) {  // So sánh mật khẩu trực tiếp
                 callback(user);  // Nếu thông tin đúng, trả về dữ liệu người dùng
             } else {
@@ -44,11 +44,13 @@ User.prototype = {
     checkUsernameExist: function(username, callback) {
         let sql = `SELECT * FROM users WHERE username = ?`;
     
-        pool.query(sql, username, function(err, result) {
-            if (err) throw err;
-            // Nếu tìm thấy kết quả, trả về true (username đã tồn tại)
-            callback(result.length > 0);
-        });
+        try {
+            const result = pool.query(sql, username);
+            return result.length > 0;
+        } catch (err) {
+            console.error("database error:", err);
+            throw err;
+        }
     }
 };
 
